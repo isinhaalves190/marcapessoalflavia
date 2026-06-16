@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Book · Flávia Mariana</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --surface3: #252525;
+    --border: #2a2a2a;
+    --border-light: #333;
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --text-dimmer: #555;
+    --accent: #c9a96e;
+    --accent-dim: #a07c4a;
+    --accent-soft: rgba(201,169,110,0.08);
+    --accent-border: rgba(201,169,110,0.2);
+    --red: #d9534f;
+    --green: #4a8c6a;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+    --radius: 6px;
+    --sidebar: 240px;
+    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: var(--sidebar);
+    min-height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    transition: transform var(--transition);
+  }
+
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-logo .initials {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: #0f0f0f;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .sidebar-logo .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .sidebar-logo .brand-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 0;
+    overflow-y: auto;
+  }
+
+  .nav-group-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dimmer);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 20px 6px;
+    font-family: var(--font-mono);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-dim);
+    transition: all var(--transition);
+    border-left: 2px solid transparent;
+    position: relative;
+  }
+
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .nav-item .nav-icon {
+    width: 16px; height: 16px;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .nav-item.active .nav-icon { opacity: 1; }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .version-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dimmer);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3px 8px;
+    display: inline-block;
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: var(--sidebar);
+    flex: 1;
+    min-height: 100vh;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(15,15,15,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+  }
+
+  .topbar-title span { color: var(--text); }
+
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: none;
+    font-family: var(--font-body);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover { background: var(--surface2); color: var(--text); border-color: var(--border-light); }
+
+  .btn-accent {
+    background: var(--accent);
+    color: #0f0f0f;
+  }
+
+  .btn-accent:hover { background: #d4b07a; }
+
+  /* PAGES */
+  .page { display: none; padding: 40px 32px; max-width: 960px; }
+  .page.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* DIVIDER */
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    transition: border-color var(--transition);
+  }
+
+  .card:hover { border-color: var(--border-light); }
+
+  .card.accent-border { border-color: var(--accent-border); background: var(--accent-soft); }
+
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  @media (max-width: 700px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* TAGS */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+    margin: 2px;
+  }
+
+  .tag-neutral { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+  .tag-accent { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
+  .tag-red { background: rgba(217,83,79,0.1); color: #e07070; border: 1px solid rgba(217,83,79,0.2); }
+  .tag-green { background: rgba(74,140,106,0.1); color: #6db896; border: 1px solid rgba(74,140,106,0.2); }
+
+  /* QUOTE BLOCK */
+  .quote-block {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 16px 0;
+  }
+
+  .quote-block p {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .quote-block .quote-source {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dimmer);
+    margin-top: 8px;
+    font-style: normal;
+  }
+
+  /* PALETTE */
+  .palette-grid { display: flex; gap: 0; border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+
+  .palette-swatch {
+    flex: 1;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px;
+    cursor: pointer;
+    transition: flex var(--transition);
+    position: relative;
+  }
+
+  .palette-swatch:hover { flex: 2; }
+
+  .swatch-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 6px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity var(--transition);
+    white-space: nowrap;
+  }
+
+  .palette-swatch:hover .swatch-label { opacity: 1; }
+
+  .swatch-dark .swatch-label { background: rgba(0,0,0,0.6); color: #fff; }
+  .swatch-light .swatch-label { background: rgba(255,255,255,0.8); color: #111; }
+
+  /* TYPOGRAPHY DEMO */
+  .type-demo {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+
+  .type-specimen {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dimmer);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* AVATAR SECTION */
+  .avatar-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+  }
+
+  .avatar-stat-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+    text-align: center;
+  }
+
+  .avatar-stat-text { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  .avatar-stat-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .filter-btn {
+    padding: 5px 12px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    transition: all var(--transition);
+    letter-spacing: 0.03em;
+  }
+
+  .filter-btn:hover { background: var(--surface2); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: #0f0f0f; border-color: var(--accent); }
+
+  /* CONTENT GRID */
+  .content-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 8px;
+    transition: all var(--transition);
+    display: none;
+  }
+
+  .content-card.visible { display: block; }
+  .content-card:hover { border-color: var(--border-light); }
+
+  .content-card-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .content-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .content-card-body { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+  /* TRANSFORMATION TABLE */
+  .transform-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    font-size: 13px;
+    transition: border-color var(--transition);
+  }
+
+  .transform-row:hover { border-color: var(--border-light); }
+
+  .transform-from { color: var(--text-dim); }
+  .transform-arrow { color: var(--accent); font-size: 16px; text-align: center; }
+  .transform-to { color: var(--text); font-weight: 500; }
+
+  /* EDITABLE FIELD */
+  .field-group { margin-bottom: 20px; }
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dimmer);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .field-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color var(--transition);
+    resize: vertical;
+  }
+
+  .field-input:focus { border-color: var(--accent-dim); }
+
+  textarea.field-input { min-height: 80px; }
+
+  /* PROGRESS */
+  .progress-bar {
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 600ms ease;
+  }
+
+  /* CHECKLIST */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .check-item:hover { border-color: var(--border-light); }
+
+  .check-item.done { opacity: 0.5; }
+
+  .check-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+  }
+
+  .check-item.done .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0f0f0f;
+  }
+
+  .check-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .check-item.done .check-text { text-decoration: line-through; }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    border: 1px solid;
+  }
+
+  .alert-warning { background: rgba(201,169,110,0.07); border-color: var(--accent-border); color: #c9a96e; }
+  .alert-danger { background: rgba(217,83,79,0.07); border-color: rgba(217,83,79,0.2); color: #e07070; }
+
+  /* COMPARISON */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+  .compare-col { background: var(--surface); padding: 20px; }
+  .compare-header { font-size: 11px; font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .compare-header.red { color: #e07070; }
+  .compare-header.green { color: #6db896; }
+  .compare-item { font-size: 13px; color: var(--text-dim); padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .compare-item:last-child { border-bottom: none; }
+
+  /* MOBILE TOGGLE */
+  .mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 12px; left: 12px;
+    z-index: 200;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 90;
+  }
+
+  /* COPY BUTTON */
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-dimmer);
+    cursor: pointer;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 3px;
+    transition: all var(--transition);
+    float: right;
+    margin-top: -2px;
+  }
+
+  .copy-btn:hover { color: var(--text-dim); border-color: var(--border-light); }
+  .copy-btn.copied { color: #6db896; border-color: rgba(74,140,106,0.3); }
+
+  /* EXPORT */
+  .export-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+
+  .export-row-info { flex: 1; }
+  .export-row-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .export-row-desc { font-size: 12px; color: var(--text-dimmer); }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .page.active { animation: fadeIn 200ms ease; }
+
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .live-dot { width: 6px; height: 6px; background: #6db896; border-radius: 50%; animation: pulse 2s infinite; display: inline-block; margin-right: 6px; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .page { padding: 24px 16px; }
+    .topbar { padding: 0 16px 0 56px; }
+    .mobile-menu-btn { display: flex; align-items: center; }
+    .overlay.active { display: block; }
+    .section-title { font-size: 24px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .palette-swatch { height: 60px; }
+    .transform-row { grid-template-columns: 1fr; }
+    .transform-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="initials">FM</div>
+    <div class="brand-name">Flávia Mariana</div>
+    <div class="brand-sub">BRAND BOOK · v1.0</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-group-label">Identidade</div>
+    <div class="nav-item active" onclick="goTo('overview', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/>
+        <rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>
+      </svg>
+      Visão geral
+    </div>
+    <div class="nav-item" onclick="goTo('positioning', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="8" y1="12" x2="8" y2="14"/><line x1="2" y1="8" x2="4" y2="8"/><line x1="12" y1="8" x2="14" y2="8"/>
+      </svg>
+      Posicionamento
+    </div>
+    <div class="nav-item" onclick="goTo('voice', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 2a3 3 0 0 1 3 3v3a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M5 8a3 3 0 0 0 6 0M8 11v3M5.5 14h5"/>
+      </svg>
+      Tom de voz
+    </div>
+    <div class="nav-group-label">Visual</div>
+    <div class="nav-item" onclick="goTo('palette', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="8" cy="8" r="6"/><circle cx="5.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="10" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      Paleta & tipografia
+    </div>
+    <div class="nav-group-label">Estratégia</div>
+    <div class="nav-item" onclick="goTo('avatar', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="8" cy="5" r="3"/><path d="M2.5 14c0-3.04 2.46-5.5 5.5-5.5s5.5 2.46 5.5 5.5"/>
+      </svg>
+      Avatar ideal
+    </div>
+    <div class="nav-item" onclick="goTo('content', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="12" height="12" rx="2"/><line x1="5" y1="6" x2="11" y2="6"/><line x1="5" y1="9" x2="9" y2="9"/>
+      </svg>
+      Conteúdo
+    </div>
+    <div class="nav-item" onclick="goTo('transform', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+      Transformações
+    </div>
+    <div class="nav-item" onclick="goTo('rules', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><line x1="5" y1="6" x2="8" y2="6"/><line x1="5" y1="9" x2="11" y2="9"/>
+      </svg>
+      Regras editoriais
+    </div>
+    <div class="nav-group-label">Ferramentas</div>
+    <div class="nav-item" onclick="goTo('export', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 2v8M5 7l3 3 3-3M2 12v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1"/>
+      </svg>
+      Exportar
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <span class="version-tag"><span class="live-dot"></span>Ativo</span>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <div class="topbar">
+    <div class="topbar-title">Brand Book · <span id="page-title">Visão geral</span></div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" onclick="goTo('export', document.querySelector('.nav-item:last-child'))">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 2v8M5 7l3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/>
+        </svg>
+        Exportar
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <div class="page active" id="page-overview">
+    <div class="section-eyebrow">Brand Book</div>
+    <h1 class="section-title">Flávia Mariana</h1>
+    <p class="section-desc">Documento estratégico central da marca. Contém posicionamento, tom de voz, avatar, estratégia de conteúdo e diretrizes de identidade visual.</p>
+
+    <div class="quote-block">
+      <p>Para a mulher que sustentou tudo, menos a si mesma.</p>
+      <div class="quote-source">FRASE DE POSICIONAMENTO · versão ultra-curta</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="grid-2">
+      <div class="card accent-border" onclick="goTo('positioning', document.querySelectorAll('.nav-item')[1])" style="cursor:pointer;">
+        <div class="card-label">Posicionamento</div>
+        <div class="card-title">Nicho & Proposta de valor</div>
+        <div class="card-body">Educação emocional para mulheres funcionais que desapareceram de si mesmas e querem reconstruir autonomia, identidade e paz.</div>
+      </div>
+      <div class="card" onclick="goTo('voice', document.querySelectorAll('.nav-item')[2])" style="cursor:pointer;">
+        <div class="card-label">Tom de voz</div>
+        <div class="card-title">5 Pilares editoriais</div>
+        <div class="card-body">Concretude, firmeza com sensibilidade, educação antes de inspiração, escuta que conduz e vida real sem espetáculo.</div>
+      </div>
+      <div class="card" onclick="goTo('avatar', document.querySelectorAll('.nav-item')[5])" style="cursor:pointer;">
+        <div class="card-label">Avatar</div>
+        <div class="card-title">Ana Paula, 38–52 anos</div>
+        <div class="card-body">Mulher funcional, responsável, forte para todos, que perdeu a si mesma no processo e quer voltar a ocupar a própria vida.</div>
+      </div>
+      <div class="card" onclick="goTo('transform', document.querySelectorAll('.nav-item')[7])" style="cursor:pointer;">
+        <div class="card-label">Transformação</div>
+        <div class="card-title">Do autoabandono à autonomia</div>
+        <div class="card-body">10 eixos de transformação documentados. Da sobrecarga à leveza, da invisibilidade ao reconhecimento.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Valores inegociáveis da marca</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;">
+      <span class="tag tag-accent">Verdade antes de conforto</span>
+      <span class="tag tag-accent">Educação como autonomia</span>
+      <span class="tag tag-accent">Expressão como método</span>
+      <span class="tag tag-accent">Acolhimento com direção</span>
+      <span class="tag tag-accent">Sustentação antes de performance</span>
+      <span class="tag tag-accent">Acessibilidade sem superficialidade</span>
+      <span class="tag tag-accent">Responsabilidade como respeito</span>
+    </div>
+
+    <div class="alert alert-warning">
+      <strong>Nota estratégica:</strong> A marca não é de relacionamento amoroso, não é de maternidade e não é de coaching de performance. O centro é autoabandono feminino e reconstrução de identidade via educação emocional.
+    </div>
+  </div>
+
+  <!-- ===================== POSITIONING ===================== -->
+  <div class="page" id="page-positioning">
+    <div class="section-eyebrow">Posicionamento</div>
+    <h1 class="section-title">Nicho & Proposta de valor</h1>
+    <p class="section-desc">Onde a marca se posiciona, o que entrega, como se diferencia e o que não é.</p>
+
+    <div class="card accent-border">
+      <div class="card-label">Definição de nicho</div>
+      <div class="card-title" style="font-family:var(--font-display);font-size:18px;line-height:1.4;">Educação emocional para mulheres que foram fortes para todos, menos para si, e que desejam reconstruir autonomia emocional, limites, autoestima e paz.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Frases de posicionamento</div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Ultra-curta · bio, header visual <button class="copy-btn" onclick="copyText(this,'Para a mulher que sustentou tudo, menos a si mesma.')">copiar</button></div>
+      <div class="card-title" style="font-family:var(--font-display);font-size:20px;">Para a mulher que sustentou tudo, menos a si mesma.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Bio · Instagram, LinkedIn <button class="copy-btn" onclick="copyText(this,'Educadora especialista em educação emocional. Conduzo mulheres que foram fortes para todos, menos para si, a reconstruírem autonomia emocional, identidade e paz, sem precisar destruir o que já construíram para voltar a existir dentro disso.')">copiar</button></div>
+      <div class="card-body" style="color:var(--text);font-size:14px;">Educadora especialista em educação emocional. Conduzo mulheres que foram fortes para todos, menos para si, a reconstruírem autonomia emocional, identidade e paz, sem precisar destruir o que já construíram para voltar a existir dentro disso.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Apresentação · lives, eventos, vídeos <button class="copy-btn" onclick="copyText(this,'Sou educadora com formação em artes cênicas e gestão educacional, e trabalho com educação emocional para mulheres que passaram anos sustentando tudo para todos e um dia perceberam que desapareceram de si mesmas no processo. Conheço esse caminho por dentro. Conduzo o percurso de volta.')">copiar</button></div>
+      <div class="card-body" style="color:var(--text);font-size:14px;">Sou educadora com formação em artes cênicas e gestão educacional, e trabalho com educação emocional para mulheres que passaram anos sustentando tudo para todos e um dia perceberam que desapareceram de si mesmas no processo. Conheço esse caminho por dentro. Conduzo o percurso de volta.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="grid-2">
+      <div>
+        <div class="card-label" style="margin-bottom:10px;">O que Flávia é</div>
+        <div class="check-item" style="cursor:default;pointer-events:none;">
+          <div class="check-box done"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#0f0f0f" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div class="check-text"><strong>Educadora</strong> com base em Paulo Freire e teatro do oprimido</div>
+        </div>
+        <div class="check-item" style="cursor:default;pointer-events:none;">
+          <div class="check-box done"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#0f0f0f" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div class="check-text"><strong>Especialista</strong> em educação emocional e reconstrução de identidade feminina</div>
+        </div>
+        <div class="check-item" style="cursor:default;pointer-events:none;">
+          <div class="check-box done"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#0f0f0f" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div class="check-text"><strong>Condutora</strong> de processos com acolhimento e direção concreta</div>
+        </div>
+      </div>
+      <div>
+        <div class="card-label" style="margin-bottom:10px;">O que Flávia não é</div>
+        <div class="check-item" style="cursor:default;pointer-events:none;opacity:0.6;">
+          <div class="check-box" style="border-color:#e07070;"></div>
+          <div class="check-text">Terapeuta ou psicóloga clínica</div>
+        </div>
+        <div class="check-item" style="cursor:default;pointer-events:none;opacity:0.6;">
+          <div class="check-box" style="border-color:#e07070;"></div>
+          <div class="check-text">Coach de performance ou produtividade</div>
+        </div>
+        <div class="check-item" style="cursor:default;pointer-events:none;opacity:0.6;">
+          <div class="check-box" style="border-color:#e07070;"></div>
+          <div class="check-text">Criadora de conteúdo de autoajuda motivacional</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Diferencial metodológico</div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Raiz pedagógica</div>
+      <div class="card-body">Formação em educação, sala de aula, EJA, coordenação pedagógica e mestrado. Trata a mulher como protagonista ativa do próprio processo, não receptora de técnica. Base em Paulo Freire: educação libertadora, escuta como respeito, aprendiz como sujeito.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Expressão e teatro como método</div>
+      <div class="card-body">Usa arte, voz, corpo e teatro como ferramentas de acesso ao que a fala direta não alcança. Para mulheres que calaram o que sentiam por anos, expressão chega onde palavras não chegam.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Acolhimento com direção · postura única</div>
+      <div class="card-body">O mercado oferece dois extremos: acolhimento puro sem confronto, ou confronto agressivo que culpa. Flávia ocupa o espaço do meio: firmeza com sensibilidade. Não deixa a mulher confortável no padrão, mas também não a humilha por ter chegado até ele.</div>
+    </div>
+  </div>
+
+  <!-- ===================== VOICE ===================== -->
+  <div class="page" id="page-voice">
+    <div class="section-eyebrow">Tom de voz</div>
+    <h1 class="section-title">5 Pilares editoriais</h1>
+    <p class="section-desc">Como a marca fala, o que prioriza e o que evita em qualquer ponto de contato com a audiência.</p>
+
+    <div class="card accent-border" style="margin-bottom:20px;">
+      <div class="card-label">A regra de ouro</div>
+      <div class="card-body" style="color:var(--text);font-size:14px;">Antes de qualquer conceito, qualquer direção, qualquer confronto: primeiro, a cena. O que essa mulher está vivendo, com a precisão que ela nunca encontrou em outro post sobre o tema. Se o texto começa no abstrato, está errado.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Pilar 1</div>
+      <div class="card-title">Concretude como método</div>
+      <div class="card-body">Tudo ancorado em fatos reais e específicos: escola com nome, rua com nome, ano, situação concreta. A emoção vive nos acontecimentos, não nos adjetivos. Abstração sem âncora real não é a linguagem da marca. Quando o texto flutua, está errado.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Pilar 2</div>
+      <div class="card-title">Firmeza com sensibilidade</div>
+      <div class="card-body">Diz o que precisa ser dito, inclusive o que incomoda, sem agredir, humilhar ou culpar. Aponta o padrão, não a falha moral da pessoa. Firmeza não é dureza, é clareza que respeita.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Pilar 3</div>
+      <div class="card-title">Educação antes de inspiração</div>
+      <div class="card-body">A voz não existe para motivar por alguns minutos. Existe para nomear padrões, organizar pensamentos e abrir caminho para mudança real. Filtro: isso ensina algo concreto, ou apenas faz a pessoa se sentir vista por 30 segundos?</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Pilar 4</div>
+      <div class="card-title">Escuta que conduz</div>
+      <div class="card-body">Não fala só para acolher desabafo. A escuta tem direção: percebe o que está por trás da fala, do silêncio e do comportamento, e conduz da confusão para a consciência, e da consciência para a postura. Acolhimento sem direção não é a linguagem da marca.</div>
+    </div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-label">Pilar 5</div>
+      <div class="card-title">Vida real sem espetáculo</div>
+      <div class="card-body">História é base de autoridade, não performance de sofrimento. Arte e teatro entram como método, não como curiosidade biográfica. Dor vira ferramenta de clareza, nunca frase de efeito.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-header red">❌ Evitar</div>
+        <div class="compare-item">Tríades paralelas: "com verdade, clareza e coragem"</div>
+        <div class="compare-item">Transições mecânicas: "além disso", "por outro lado", "em suma"</div>
+        <div class="compare-item">Conclusão que resume o que acabou de ser dito</div>
+        <div class="compare-item">Adjetivos genéricos empilhados: "profundo e transformador"</div>
+        <div class="compare-item">"É fundamental que" / "Vale ressaltar que"</div>
+        <div class="compare-item">Construções do tipo "não é sobre X, é sobre Y"</div>
+        <div class="compare-item">Três palavras no final para efeito dramático</div>
+        <div class="compare-item">Travessão em qualquer hipótese</div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-header green">✓ Usar</div>
+        <div class="compare-item">Concreto, na prática, no cotidiano</div>
+        <div class="compare-item">Reconstruir, reorganizar, reposicionar</div>
+        <div class="compare-item">Sustentação, base emocional, padrão, postura</div>
+        <div class="compare-item">Nomear, nomeou (dar nome ao que a pessoa vive)</div>
+        <div class="compare-item">Autonomia, direção, identidade, consciência</div>
+        <div class="compare-item">"Aos poucos", "com o tempo", "ao longo de"</div>
+        <div class="compare-item">Referências situadas: escola, cidade, ano, nome</div>
+        <div class="compare-item">Paulo Freire, Boal, EJA (quando o contexto pede)</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Palavras proibidas</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <span class="tag tag-red">liberdade financeira</span>
+      <span class="tag tag-red">vida dos sonhos</span>
+      <span class="tag tag-red">fórmula exclusiva</span>
+      <span class="tag tag-red">segredo</span>
+      <span class="tag tag-red">destravar</span>
+      <span class="tag tag-red">virada de chave</span>
+      <span class="tag tag-red">próximo nível</span>
+      <span class="tag tag-red">jornada</span>
+      <span class="tag tag-red">propósito</span>
+      <span class="tag tag-red">sucesso inevitável</span>
+      <span class="tag tag-red">ressignificar</span>
+      <span class="tag tag-red">se permitir</span>
+      <span class="tag tag-red">brilhar</span>
+      <span class="tag tag-red">florescer</span>
+      <span class="tag tag-red">despertar</span>
+      <span class="tag tag-red">mulher poderosa</span>
+      <span class="tag tag-red">guerreira</span>
+      <span class="tag tag-red">rainha</span>
+      <span class="tag tag-red">você consegue</span>
+      <span class="tag tag-red">acredite em você</span>
+      <span class="tag tag-red">vai dar certo</span>
+      <span class="tag tag-red">você merece</span>
+      <span class="tag tag-red">incrível</span>
+      <span class="tag tag-red">extraordinário</span>
+    </div>
+  </div>
+
+  <!-- ===================== PALETTE ===================== -->
+  <div class="page" id="page-palette">
+    <div class="section-eyebrow">Identidade visual</div>
+    <h1 class="section-title">Paleta & Tipografia</h1>
+    <p class="section-desc">Sistema de cores, fontes e hierarquia visual da marca. Clique nas cores para copiar o hex.</p>
+
+    <div class="card-label" style="margin-bottom:12px;">Paleta principal</div>
+    <div class="palette-grid">
+      <div class="palette-swatch swatch-dark" style="background:#0f0f0f;" onclick="copyHex(this,'#0F0F0F')">
+        <span class="swatch-label">#0F0F0F · Fundo</span>
+      </div>
+      <div class="palette-swatch swatch-dark" style="background:#1e1e1e;" onclick="copyHex(this,'#1E1E1E')">
+        <span class="swatch-label">#1E1E1E · Superfície</span>
+      </div>
+      <div class="palette-swatch swatch-dark" style="background:#c9a96e;" onclick="copyHex(this,'#C9A96E')">
+        <span class="swatch-label">#C9A96E · Ouro</span>
+      </div>
+      <div class="palette-swatch swatch-dark" style="background:#a07c4a;" onclick="copyHex(this,'#A07C4A')">
+        <span class="swatch-label">#A07C4A · Ouro escuro</span>
+      </div>
+      <div class="palette-swatch swatch-dark" style="background:#e8e8e8;" onclick="copyHex(this,'#E8E8E8')">
+        <span class="swatch-label" style="color:#0f0f0f;">#E8E8E8 · Texto</span>
+      </div>
+      <div class="palette-swatch swatch-dark" style="background:#888888;" onclick="copyHex(this,'#888888')">
+        <span class="swatch-label">#888888 · Texto dim</span>
+      </div>
+    </div>
+
+    <div id="hex-feedback" style="font-family:var(--font-mono);font-size:11px;color:#6db896;min-height:16px;margin-bottom:20px;transition:opacity 300ms;"></div>
+
+    <div class="card-label" style="margin-bottom:8px;">Uso das cores</div>
+    <div class="avatar-stat">
+      <div class="avatar-stat-num" style="font-size:18px;font-family:var(--font-mono);color:var(--text-dimmer);">BG</div>
+      <div class="avatar-stat-text"><div class="avatar-stat-title">#0F0F0F · Fundo</div>Base de toda composição. Transmite seriedade, profundidade e não distrai do conteúdo.</div>
+    </div>
+    <div class="avatar-stat">
+      <div class="avatar-stat-num" style="font-size:16px;font-family:var(--font-mono);color:var(--accent);">AU</div>
+      <div class="avatar-stat-text"><div class="avatar-stat-title">#C9A96E · Ouro</div>Cor de destaque única. Usada com restrição: links, indicadores ativos, elementos de ênfase. Não decorar, só sinalizar.</div>
+    </div>
+    <div class="avatar-stat">
+      <div class="avatar-stat-num" style="font-size:16px;font-family:var(--font-mono);color:var(--text-dimmer);">TX</div>
+      <div class="avatar-stat-text"><div class="avatar-stat-title">#E8E8E8 / #888 · Texto</div>Hierarquia clara: texto principal em #E8E8E8, texto secundário em #888, elementos inativos em #555.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Tipografia</div>
+
+    <div class="type-demo">
+      <div class="type-meta">DISPLAY · DM Serif Display</div>
+      <div class="type-specimen">Flávia Mariana</div>
+      <div class="type-specimen" style="font-style:italic;font-size:20px;margin-top:8px;">Educação emocional</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-dimmer);">Para títulos, frases de posicionamento, pull quotes e destaques editoriais de alto impacto.</div>
+    </div>
+
+    <div class="type-demo">
+      <div class="type-meta">CORPO · Inter</div>
+      <div style="font-family:var(--font-body);font-size:15px;color:var(--text);line-height:1.7;">Uma mulher que passou anos sustentando tudo para todos não muda de postura com uma frase de incentivo. Ela muda quando alguém nomeia com precisão o que está acontecendo, quando o processo tem direção real.</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-dimmer);">Peso 300–600. Para corpo de texto, captions, interfaces e conteúdo corrido.</div>
+    </div>
+
+    <div class="type-demo">
+      <div class="type-meta">MONO · DM Mono</div>
+      <div style="font-family:var(--font-mono);font-size:13px;color:var(--accent);letter-spacing:0.06em;">EDUCAÇÃO EMOCIONAL · BRAND BOOK · v1.0</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-dimmer);">Para labels, tags, metadados, versões e elementos de interface técnica.</div>
+    </div>
+  </div>
+
+  <!-- ===================== AVATAR ===================== -->
+  <div class="page" id="page-avatar">
+    <div class="section-eyebrow">Avatar ideal</div>
+    <h1 class="section-title">Ana Paula</h1>
+    <p class="section-desc">Perfil simbólico da cliente ideal. Não é uma pessoa real, é um mapa estratégico de comportamentos, dores, desejos e padrões decisórios.</p>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="avatar-stat">
+        <div class="avatar-stat-num">38</div>
+        <div class="avatar-stat-text"><div class="avatar-stat-title">38 a 52 anos</div>Geração X ou Millennial mais velha. Cresceu com papéis tradicionais bem definidos.</div>
+      </div>
+      <div class="avatar-stat">
+        <div class="avatar-stat-num">C/B</div>
+        <div class="avatar-stat-text"><div class="avatar-stat-title">Classes C e B</div>Renda familiar entre R$ 2.500 e R$ 6.000. Gasta com família antes de gastar consigo.</div>
+      </div>
+      <div class="avatar-stat">
+        <div class="avatar-stat-num">SP</div>
+        <div class="avatar-stat-text"><div class="avatar-stat-title">Regiões metropolitanas</div>Zona leste, norte e sul das capitais. Não é da elite dos grandes centros.</div>
+      </div>
+      <div class="avatar-stat">
+        <div class="avatar-stat-num">2–3</div>
+        <div class="avatar-stat-text"><div class="avatar-stat-title">Nível de consciência 2–3</div>Sabe que algo está errado, mas ainda não nomeou o problema. Pesquisa, mas não encontrou confiança suficiente para investir.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Dores centrais</div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-body">Cansaço crônico de dar conta de tudo para todos. Sensação de que desapareceu de si mesma sem perceber quando isso aconteceu.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-body">Dificuldade de dizer não sem sentir culpa depois. Raiva que não consegue expressar e vai virando amargura com o tempo.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-body">Tristeza sem causa clara que justifica com trabalho e rotina para não precisar enfrentá-la. Sensação de que está funcionando, não vivendo.</div>
+    </div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-body">Sentir que é respeitada pelas responsabilidades que carrega, não por quem é. Sentir-se invisível dentro dos próprios relacionamentos.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Vocabulário dela · frases reais</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;">
+      <span class="tag tag-neutral">"Estou cansada"</span>
+      <span class="tag tag-neutral">"Eu me perdi"</span>
+      <span class="tag tag-neutral">"Parece que eu virei função"</span>
+      <span class="tag tag-neutral">"Não consigo dizer não"</span>
+      <span class="tag tag-neutral">"Me sinto invisível"</span>
+      <span class="tag tag-neutral">"Não sei mais quem eu sou"</span>
+      <span class="tag tag-neutral">"Eu cuido de todo mundo mas ninguém cuida de mim"</span>
+      <span class="tag tag-neutral">"Queria ter coragem de me escolher"</span>
+      <span class="tag tag-neutral">"Eu só quero paz"</span>
+      <span class="tag tag-neutral">"Não quero mais ser forte desse jeito"</span>
+      <span class="tag tag-neutral">"Estou funcionando, mas não estou bem"</span>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Gatilho de compra · 3 elementos simultâneos</div>
+    <div class="grid-3">
+      <div class="card accent-border">
+        <div class="card-label">01</div>
+        <div class="card-title">Identificação</div>
+        <div class="card-body" style="font-size:12px;">"Ela está falando exatamente de mim, não de uma versão genérica, mas da minha situação real."</div>
+      </div>
+      <div class="card accent-border">
+        <div class="card-label">02</div>
+        <div class="card-title">Segurança</div>
+        <div class="card-body" style="font-size:12px;">"Não vou ser julgada nem exposta. Posso aparecer com as contradições que tenho."</div>
+      </div>
+      <div class="card accent-border">
+        <div class="card-label">03</div>
+        <div class="card-title">Direção</div>
+        <div class="card-body" style="font-size:12px;">"Isso não é só reflexão e acolhimento. Tem caminho concreto para onde preciso chegar."</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Anti-avatar · quem não é o público</div>
+    <div class="alert alert-danger">
+      Mulher que quer só validação sem processo. Mulher que quer terceirizar a responsabilidade pela própria vida. Mulher que busca promessa de cura rápida. Mulher que não quer se confrontar com responsabilidade sobre o que permite continuar acontecendo.
+    </div>
+  </div>
+
+  <!-- ===================== CONTENT ===================== -->
+  <div class="page" id="page-content">
+    <div class="section-eyebrow">Estratégia de conteúdo</div>
+    <h1 class="section-title">Roteiro de consciência</h1>
+    <p class="section-desc">Estrutura completa de conteúdo organizada por função estratégica. Use os filtros para navegar.</p>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterContent('all', this)">Todos</button>
+      <button class="filter-btn" onclick="filterContent('identificacao', this)">Identificação</button>
+      <button class="filter-btn" onclick="filterContent('nomeacao', this)">Nomeação</button>
+      <button class="filter-btn" onclick="filterContent('confronto', this)">Confronto</button>
+      <button class="filter-btn" onclick="filterContent('direcao', this)">Direção prática</button>
+      <button class="filter-btn" onclick="filterContent('autoridade', this)">Autoridade</button>
+      <button class="filter-btn" onclick="filterContent('formato', this)">Formatos</button>
+    </div>
+
+    <div id="content-list">
+
+      <div class="content-card visible" data-cat="identificacao">
+        <div class="content-card-tag">Identificação · Parar o scroll</div>
+        <div class="content-card-title">Sinais de que você foi forte para todos, menos para si</div>
+        <div class="content-card-body">Objetivo: fazer a mulher pensar "é exatamente isso que eu vivo". Primeiro contato. Sem conceito, sem solução. Só espelhamento preciso da experiência.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="identificacao">
+        <div class="content-card-tag">Identificação · Parar o scroll</div>
+        <div class="content-card-title">Como a mulher funcional se perde de si sem perceber</div>
+        <div class="content-card-body">Descreve o processo gradual de autoabandono. A mulher que lê se reconhece sem sentir que está sendo exposta ou julgada.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="identificacao">
+        <div class="content-card-tag">Identificação · Parar o scroll</div>
+        <div class="content-card-title">Quando a vida parece certa por fora, mas sem paz por dentro</div>
+        <div class="content-card-body">Fala com mulheres funcionais que não sabem nomear o que sentem. Alta taxa de identificação para o nível de consciência 2.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="nomeacao">
+        <div class="content-card-tag">Nomeação · Dar nome ao problema</div>
+        <div class="content-card-title">O que é autoabandono feminino na prática cotidiana</div>
+        <div class="content-card-body">Educativo. Tira a mulher do vago e coloca linguagem precisa no que ela vive. Reduz a minimização ("meu problema não é tão grave").</div>
+      </div>
+
+      <div class="content-card visible" data-cat="nomeacao">
+        <div class="content-card-tag">Nomeação · Dar nome ao problema</div>
+        <div class="content-card-title">Por que você tem dificuldade de dizer não mesmo quando quer</div>
+        <div class="content-card-body">Explica o padrão sem culpar. Nomeia a estrutura por trás do comportamento, o que desloca a mulher da vergonha para a compreensão.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="nomeacao">
+        <div class="content-card-tag">Nomeação · Dar nome ao problema</div>
+        <div class="content-card-title">Como a autoestima vai sendo perdida aos poucos, não de uma vez</div>
+        <div class="content-card-body">Processo, não evento. Importante para mulheres que não conseguem identificar quando ou como aconteceu.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="confronto">
+        <div class="content-card-tag">Confronto responsável · Provocar movimento</div>
+        <div class="content-card-title">Você não vai reconstruir sua vida apenas entendendo o que sente</div>
+        <div class="content-card-body">Tira a mulher da identificação passiva. Confronto sem culpar. Aponta que consciência sem postura é insuficiente.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="confronto">
+        <div class="content-card-tag">Confronto responsável · Provocar movimento</div>
+        <div class="content-card-title">Parar de se abandonar vai incomodar algumas pessoas, e isso faz parte</div>
+        <div class="content-card-body">Prepara a mulher para a resistência externa que virá quando ela começar a se posicionar. Reduz o medo de "perder vínculos se mudar".</div>
+      </div>
+
+      <div class="content-card visible" data-cat="direcao">
+        <div class="content-card-tag">Direção prática · Preparar para oferta</div>
+        <div class="content-card-title">Como começar a voltar para si dentro da rotina que você já tem</div>
+        <div class="content-card-body">Não exige ruptura. Fala para a mulher que tem medo de destruir o que construiu. Mostra que mudança é possível dentro da vida real.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="direcao">
+        <div class="content-card-tag">Direção prática · Preparar para oferta</div>
+        <div class="content-card-title">Como identificar onde você tem se abandonado no dia a dia</div>
+        <div class="content-card-body">Exercício concreto. Produz uma pequena vitória prática. Alta intenção de salvar e compartilhar.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="autoridade">
+        <div class="content-card-tag">Autoridade · Construir confiança em Flávia</div>
+        <div class="content-card-title">O que a sala de aula ensinou sobre mulheres, histórias e recomeços</div>
+        <div class="content-card-body">Liga a trajetória pedagógica ao método atual. Credencial sem ostentação. História como prova de método, não como performance de sofrimento.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="autoridade">
+        <div class="content-card-tag">Autoridade · Construir confiança em Flávia</div>
+        <div class="content-card-title">Por que Flávia não romantiza força feminina</div>
+        <div class="content-card-body">Diferencial de posicionamento. Combate diretamente o conteúdo de "mulher guerreira" que o público já testou e não sustentou.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="formato">
+        <div class="content-card-tag">Formatos · Prioridade estratégica</div>
+        <div class="content-card-title">Reels · 30 a 90 segundos</div>
+        <div class="content-card-body">Descoberta. Abertura que espelha a experiência dela. Sem apresentação, sem "hoje vou falar sobre". Começa no meio da realidade dela. Formato prioritário no início da marca.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="formato">
+        <div class="content-card-tag">Formatos · Prioridade estratégica</div>
+        <div class="content-card-title">Carrosséis · lógica de progressão</div>
+        <div class="content-card-body">Aprofundamento. Identificação na abertura, aprofundamento no meio, direção prática no final. Alta taxa de salvamento quando a abertura fisga.</div>
+      </div>
+
+      <div class="content-card visible" data-cat="formato">
+        <div class="content-card-tag">Formatos · Prioridade estratégica</div>
+        <div class="content-card-title">Lives · conversão</div>
+        <div class="content-card-body">Apenas depois de audiência com vínculo estabelecido. Não no início. Conversão acontece aqui, não em Reels.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== TRANSFORM ===================== -->
+  <div class="page" id="page-transform">
+    <div class="section-eyebrow">Transformações</div>
+    <h1 class="section-title">Do / Para</h1>
+    <p class="section-desc">Os 10 eixos de transformação que definem o que a marca entrega. São a base da promessa comercial, do conteúdo e de qualquer oferta.</p>
+
+    <div class="alert alert-warning">
+      <strong>Transformação central:</strong> Ela não quer abandonar a vida que construiu. Ela quer parar de ser a última prioridade dentro da própria vida.
+    </div>
+
+    <div class="transform-row">
+      <div class="transform-from">Cansada</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Sustentada por dentro</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Anulada</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Presente em sua própria vida</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Insegura</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Consciente de seu valor</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Calada</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Posicionada</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Culpada</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Responsável pelas próprias escolhas</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Perdida</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Direcionada</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Sobrecarregada</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Mais leve</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Invisível</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Reconhecida, começando por si mesma</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Sobrevivente</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Protagonista da própria vida</div>
+    </div>
+    <div class="transform-row">
+      <div class="transform-from">Forte por obrigação</div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-to">Inteira por escolha</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Estrutura de produto coerente com a transformação</div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Entrada · Gerar confiança</div>
+      <div class="card-title">Ebook, guia, aula gravada, checklist, mini curso</div>
+      <div class="card-body">Investimento aprovável sozinha. Nomeia o problema com clareza, mostra a linguagem de Flávia, entrega uma pequena vitória prática. Prepara para oferta maior.</div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-label">Intermediário · Criar experiência</div>
+      <div class="card-title">Processo de 21–30 dias, grupo guiado, ciclo temático</div>
+      <div class="card-body">Gera depoimentos concretos, valida a promessa, constrói vínculo com a marca. Temas: limites, autoestima, retorno a si.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Premium · Profundidade</div>
+      <div class="card-title">Mentoria em grupo, programa com encontros ao vivo</div>
+      <div class="card-body">Entrega profundidade, cria comunidade, aumenta percepção de valor. Grupo pequeno com acompanhamento. Constrói autoridade que nenhum conteúdo gratuito constrói sozinho.</div>
+    </div>
+  </div>
+
+  <!-- ===================== RULES ===================== -->
+  <div class="page" id="page-rules">
+    <div class="section-eyebrow">Regras editoriais</div>
+    <h1 class="section-title">Checklist de publicação</h1>
+    <p class="section-desc">Use antes de publicar qualquer conteúdo. Clique em cada item para marcar como verificado.</p>
+
+    <div class="card-label" style="margin-bottom:12px;">Abertura do conteúdo</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">A primeira frase começa dentro da realidade dela, não apresentando o tema ou quem vai falar</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">A abertura não poderia ter sido escrita por qualquer criador de conteúdo sobre o mesmo tema</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Há um elemento concreto: comportamento específico, situação real, detalhe que ela reconhece em si</div>
+    </div>
+
+    <div class="card-label" style="margin-bottom:12px;margin-top:20px;">Tom e linguagem</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Nenhuma palavra proibida presente (verificar lista na aba "Tom de voz")</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Sem travessão em nenhuma hipótese</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Sem três palavras paralelas no final para criar impacto ("paz, liberdade e transformação")</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Sem construção "não é sobre X, é sobre Y"</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Texto flui em frases conectadas, não fragmentado em pontos finais artificiais</div>
+    </div>
+
+    <div class="card-label" style="margin-bottom:12px;margin-top:20px;">Conteúdo e estrutura</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">O conteúdo ensina algo concreto, não apenas valida a emoção</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Se a história pessoal de Flávia aparece, entra para sustentar um ponto, não como protagonista em si</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">O encerramento deixa uma direção concreta ou uma pergunta real, não uma frase de efeito</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">A mulher é tratada como adulta capaz de se conduzir, não como vítima que precisa de resgate</div>
+    </div>
+
+    <div class="card-label" style="margin-bottom:12px;margin-top:20px;">Foco estratégico</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">O conteúdo está dentro do centro da marca: autoabandono feminino e reconstrução de identidade</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Não reduziu a mulher a um único tema (relacionamento, maternidade, carreira) como se fosse o todo</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">O conteúdo serve a alguma fase do roteiro de consciência (identificação, nomeação, confronto, direção, autoridade)</div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="field-label">Progresso da revisão</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-top:6px;" id="progress-label">0 de 16 itens verificados</div>
+    </div>
+  </div>
+
+  <!-- ===================== EXPORT ===================== -->
+  <div class="page" id="page-export">
+    <div class="section-eyebrow">Ferramentas</div>
+    <h1 class="section-title">Exportar</h1>
+    <p class="section-desc">Opções de exportação do Brand Book. Use para compartilhar com colaboradores, designers ou para registro.</p>
+
+    <div class="card-label" style="margin-bottom:12px;">Exportar seções</div>
+
+    <div class="export-row">
+      <div class="export-row-info">
+        <div class="export-row-name">Brand Book completo · PDF</div>
+        <div class="export-row-desc">Imprime todas as seções em layout estruturado para apresentação a clientes ou colaboradores</div>
+      </div>
+      <button class="btn btn-accent" onclick="window.print()">Imprimir / PDF</button>
+    </div>
+
+    <div class="export-row">
+      <div class="export-row-info">
+        <div class="export-row-name">Frases de posicionamento</div>
+        <div class="export-row-desc">3 versões prontas para uso: ultra-curta, bio e apresentação</div>
+      </div>
+      <button class="btn btn-ghost" onclick="copyBlock()">Copiar tudo</button>
+    </div>
+
+    <div class="export-row">
+      <div class="export-row-info">
+        <div class="export-row-name">Lista de palavras proibidas</div>
+        <div class="export-row-desc">Para uso em briefings de criação de conteúdo com terceiros</div>
+      </div>
+      <button class="btn btn-ghost" onclick="copyProibidas()">Copiar lista</button>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-label" style="margin-bottom:12px;">Notas para colaboradores</div>
+
+    <div class="field-group">
+      <label class="field-label">Instrução para redator / social media</label>
+      <textarea class="field-input" id="collab-note" placeholder="Ex: usar sempre o guia de tom de voz antes de redigir qualquer conteúdo. Nenhum texto vai para aprovação sem passar pelo checklist de publicação...">Os documentos de posicionamento foram gerados com IA e contêm construções que Flávia proibiu. Eles são referência de conteúdo e estratégia, não de voz. A voz real está no manifesto e nos exemplos do guia de tom de voz.
+
+Regras absolutas:
+1. Nunca usar travessão
+2. Nunca usar as palavras da lista proibida
+3. Sempre começar o texto dentro da realidade da mulher, não apresentando o tema
+4. Encerramento com direção concreta, nunca frase de efeito
+5. Verificar checklist completo antes de enviar para aprovação</textarea>
+    </div>
+
+    <button class="btn btn-accent" onclick="copyNote()">Copiar nota</button>
+
+    <div id="export-feedback" style="font-family:var(--font-mono);font-size:11px;color:#6db896;min-height:16px;margin-top:12px;transition:opacity 300ms;"></div>
+  </div>
+
+</main>
+
+<script>
+  const pageTitles = {
+    overview: 'Visão geral',
+    positioning: 'Posicionamento',
+    voice: 'Tom de voz',
+    palette: 'Paleta & tipografia',
+    avatar: 'Avatar ideal',
+    content: 'Conteúdo',
+    transform: 'Transformações',
+    rules: 'Regras editoriais',
+    export: 'Exportar'
+  };
+
+  function goTo(pageId, navEl) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    // Show target
+    document.getElementById('page-' + pageId).classList.add('active');
+    if (navEl) navEl.classList.add('active');
+
+    document.getElementById('page-title').textContent = pageTitles[pageId] || pageId;
+
+    // Close mobile menu
+    if (window.innerWidth <= 768) toggleMenu(false);
+
+    window.scrollTo(0, 0);
+  }
+
+  function toggleMenu(force) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const isOpen = sidebar.classList.contains('open');
+    const open = force !== undefined ? force : !isOpen;
+    sidebar.classList.toggle('open', open);
+    overlay.classList.toggle('active', open);
+  }
+
+  function filterContent(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.content-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const box = el.querySelector('.check-box');
+    if (el.classList.contains('done')) {
+      box.innerHTML = '<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#0f0f0f" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg>';
+    } else {
+      box.innerHTML = '';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = document.querySelectorAll('#page-rules .check-item').length;
+    const done = document.querySelectorAll('#page-rules .check-item.done').length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = done + ' de ' + total + ' itens verificados';
+  }
+
+  function copyHex(el, hex) {
+    navigator.clipboard.writeText(hex).catch(() => {});
+    const fb = document.getElementById('hex-feedback');
+    fb.textContent = hex + ' copiado';
+    fb.style.opacity = '1';
+    setTimeout(() => { fb.style.opacity = '0'; }, 2000);
+  }
+
+  function copyText(btn, text) {
+    navigator.clipboard.writeText(text).catch(() => {});
+    btn.textContent = 'copiado ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('copied'); }, 2000);
+  }
+
+  function copyBlock() {
+    const text = `FRASES DE POSICIONAMENTO · FLÁVIA MARIANA
+
+ULTRA-CURTA (bio, header visual):
+Para a mulher que sustentou tudo, menos a si mesma.
+
+BIO (Instagram, LinkedIn):
+Educadora especialista em educação emocional. Conduzo mulheres que foram fortes para todos, menos para si, a reconstruírem autonomia emocional, identidade e paz, sem precisar destruir o que já construíram para voltar a existir dentro disso.
+
+APRESENTAÇÃO (lives, eventos, vídeos):
+Sou educadora com formação em artes cênicas e gestão educacional, e trabalho com educação emocional para mulheres que passaram anos sustentando tudo para todos e um dia perceberam que desapareceram de si mesmas no processo. Conheço esse caminho por dentro. Conduzo o percurso de volta.`;
+    navigator.clipboard.writeText(text).catch(() => {});
+    showExportFeedback('Frases de posicionamento copiadas');
+  }
+
+  function copyProibidas() {
+    const text = `PALAVRAS PROIBIDAS · FLÁVIA MARIANA
+liberdade financeira, vida dos sonhos, fórmula exclusiva, segredo, destravar, virada de chave, próximo nível, jornada, propósito, sucesso inevitável, ressignificar, se permitir, brilhar, florescer, despertar (sentido motivacional), mulher poderosa, guerreira, rainha, cura como produto, você consegue, acredite em você, vai dar certo, você merece, incrível, extraordinário, maravilhoso (como intensificadores vazios)
+
+CONSTRUÇÕES PROIBIDAS:
+- Travessão (em qualquer hipótese)
+- "Não é sobre X, é sobre Y"
+- Três palavras paralelas no final para efeito ("paz, clareza e coragem")
+- Tríades paralelas genéricas
+- Transições mecânicas: além disso, por outro lado, em suma, é importante notar que`;
+    navigator.clipboard.writeText(text).catch(() => {});
+    showExportFeedback('Lista de palavras proibidas copiada');
+  }
+
+  function copyNote() {
+    const text = document.getElementById('collab-note').value;
+    navigator.clipboard.writeText(text).catch(() => {});
+    showExportFeedback('Nota copiada');
+  }
+
+  function showExportFeedback(msg) {
+    const fb = document.getElementById('export-feedback');
+    fb.textContent = msg + ' ✓';
+    fb.style.opacity = '1';
+    setTimeout(() => { fb.style.opacity = '0'; }, 2500);
+  }
+</script>
+</body>
+</html>
